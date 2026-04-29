@@ -1,0 +1,128 @@
+{
+  "theme": "dark",
+  "archetype": "5 (Jewel & Luxury / Dark Brutalist)",
+  "concept": "Sacred Brutalism (Brutalismo Sacro)",
+  "emotional_tone": "Monumental, Divine, Awe-inspiring, Cinematic, Ancient yet Modern",
+  "colors": {
+    "background_base": "#0a0a0c",
+    "surface_stone": "#131315",
+    "surface_glass": "rgba(19, 19, 21, 0.7)",
+    "border_dim": "#262628",
+    "primary_accent": "#c4a259",
+    "highlight_gold": "#e1d4ba",
+    "text_primary": "#e6e0d4",
+    "text_secondary": "#948f87",
+    "error_crimson": "#5e1914"
+  },
+  "typography": {
+    "fonts": [
+      {
+        "role": "Monumental Heading",
+        "family": "Marcellus",
+        "usage": "H1, Hero titles, massive background text. Replaces standard Trajan/Cinzel for a more modern, less cliché Roman lapidary feel."
+      },
+      {
+        "role": "Narrative Heading",
+        "family": "Cormorant Garamond",
+        "usage": "H2, H3, quotes, detail descriptions. Elegant, varied weight serif for narrative depth."
+      },
+      {
+        "role": "Body & UI",
+        "family": "Outfit",
+        "usage": "Paragraphs, navigation, buttons, small labels. Provides a clean, architectural geometric contrast."
+      }
+    ],
+    "scale": {
+      "h1": "text-6xl md:text-8xl tracking-tighter uppercase",
+      "h2": "text-4xl md:text-5xl tracking-tight",
+      "h3": "text-2xl md:text-3xl",
+      "body": "text-base leading-relaxed tracking-wide",
+      "overline": "text-xs tracking-[0.3em] uppercase"
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Massive negative space, monumental asymmetry, brutalist grids.",
+    "container": "Max width screen, minimal horizontal padding (px-4 to px-12), letting 3D elements break the grid.",
+    "grid_system": "Bento 'Tetris' Grid (Mode A) for the catalog layout. Overlapping DOM elements with the fixed R3F canvas behind.",
+    "spacing": "Extremely generous (py-24 to py-48) to force dramatic scrolling and camera movement."
+  },
+  "webgl_3d_strategy": {
+    "stack": "React Three Fiber (R3F) + Drei + GSAP ScrollTrigger",
+    "post_processing": "EffectComposer with Bloom (luminanceThreshold 0.4), Noise/Grain overlay (opacity 0.15), and subtle ChromaticAberration (RGB Shift during fast scroll).",
+    "lighting": "Cinematic Cathedral Lighting. SpotLights with high penumbra casting volumetric rays from top-angles. Deep ambient occlusion (AO). Minimal ambient light.",
+    "materials": "Custom GLSL Shaders blending MeshStandardMaterial with noise for stone/marble textures. Patinated gold accents on edges.",
+    "camera": "PerspectiveCamera positioned low, looking slightly up to emphasize monumental scale.",
+    "interactions": "Raycasting on religious artifacts. On pointer enter: slow continuous rotation, cursor changes, bloom intensity spikes slightly. On click: GSAP animates camera closer to object."
+  },
+  "sections": [
+    {
+      "name": "Hero Inmersivo",
+      "layout": "Fixed 3D Canvas in background. Overlay DOM with massive 'Marcellus' typography vertically centered.",
+      "behavior": "ScrollTrigger ties window scroll to camera Z-position. Moving forward into the cathedral void. Text fades out via scroll."
+    },
+    {
+      "name": "Catálogo Navegable (Museo 3D)",
+      "layout": "Asymmetrical grid overlaying the 3D scene. 3D models float at different Z-depths.",
+      "behavior": "Non-linear layout. As user scrolls, new artifacts drift into view. HTML captions appear next to the active 3D object using Drei's <Html> component."
+    },
+    {
+      "name": "Detalle de Obra (Narrativa)",
+      "layout": "Split screen or heavy negative space. 3D object locked on one side (rotating), elegant 'Cormorant' typography scrolling on the other.",
+      "behavior": "Cinematic easing using GSAP 'Power4.easeInOut' when transitioning into detail view."
+    },
+    {
+      "name": "Formulario de Pedido/Contacto",
+      "layout": "Brutalist block centered on screen. Dark surfaces with 1px gold/dim borders. Monospaced or clean sans input fields.",
+      "components": "Shadcn Form, Input, Textarea. Customized with 'bg-transparent border-b border-border_dim rounded-none focus:border-primary_accent'."
+    },
+    {
+      "name": "Footer Monumental",
+      "layout": "Massive padding. A gigantic brand mark or typography spanning 100vw, with tiny technical/contact links at the bottom.",
+      "behavior": "Revealed from behind the main content (sticky bottom z-[-1])."
+    }
+  ],
+  "micro_interactions": {
+    "buttons": "Dark stone background. On hover: subtle gold border tracing (Aceternity tracing beam style) or text color shift to gold.",
+    "cursor": "Custom dot cursor that expands into a ring over clickable 3D objects or 2D links.",
+    "scroll": "Lenis smooth scroll mandatory for weighty, momentum-based scrolling. Heavy damping for a 'heavy stone' feel."
+  },
+  "media": {
+    "textures": [
+      {
+        "category": "marble_dark_veins",
+        "url": "https://images.unsplash.com/photo-1747696766706-5485b39bf358?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwxfHxtYXJibGUlMjBzdG9uZSUyMHRleHR1cmUlMjBkYXJrfGVufDB8fHx8MTc3NzQ3MTQxMXww&ixlib=rb-4.1.0&q=85",
+        "description": "Black marble with white veins, ideal for base floor or object shaders."
+      },
+      {
+        "category": "stone_intricate",
+        "url": "https://images.pexels.com/photos/18325786/pexels-photo-18325786.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Close-up dark Carnico marble surface for wall textures or brutalist UI blocks."
+      }
+    ],
+    "artworks": [
+      {
+        "category": "christ_bust",
+        "url": "https://images.unsplash.com/photo-1775830388407-508a0dd68bc3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBzY3VscHR1cmUlMjBjaHJpc3R8ZW58MHx8fHwxNzc3NDcxNDExfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Marble bust of Jesus wearing a crown of thorns (use as texture mapped onto a 3D plane or as a standalone 2D hero image if 3D model unavailable)."
+      },
+      {
+        "category": "christ_detailed",
+        "url": "https://images.pexels.com/photos/10800862/pexels-photo-10800862.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Close-up of detailed stone sculpture of Christ."
+      },
+      {
+        "category": "virgin_mary_mosaic",
+        "url": "https://images.unsplash.com/photo-1768038566053-d839aea8a38e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwyfHxieXphbnRpbmUlMjBvcnRob2RveCUyMGljb258ZW58MHx8fHwxNzc3NDcxNDExfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Mosaic of the Virgin Mary in a golden background. Can be used as a texture for an altar or wall piece."
+      },
+      {
+        "category": "byzantine_interior",
+        "url": "https://images.pexels.com/photos/27134187/pexels-photo-27134187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Orthodox church interior. Can be used as a blurry background map (Environment) for realistic reflections in 3D materials."
+      }
+    ]
+  },
+  "testing": {
+    "attributes": "All interactive elements, forms, links, and 3D Html overlays MUST use data-testid (e.g., data-testid='contact-form-submit', data-testid='catalog-item-christ')."
+  }
+}
