@@ -1,34 +1,180 @@
-.App-logo {
-    height: 40vmin;
+.App {
+    min-height: 100vh;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    position: relative;
+}
+
+.canvas-fixed {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+.content-layer {
+    position: relative;
+    z-index: 2;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    padding: 8rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .section {
+        padding: 10rem 3rem;
     }
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+.section-frame {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Hero typography */
+.hero-title {
+    font-family: "Marcellus", serif;
+    font-size: clamp(3.5rem, 14vw, 12rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+.hero-title .accent {
+    color: var(--primary-accent);
+    font-style: italic;
+    font-family: "Cormorant Garamond", serif;
+    text-transform: lowercase;
+    font-weight: 300;
+}
+
+/* Catalog tile */
+.tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-dim);
+    background: var(--surface-stone);
+    transition:
+        border-color 0.5s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tile:hover {
+    border-color: var(--primary-accent);
+}
+.tile img {
+    transition:
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.6s ease;
+    filter: grayscale(0.4) contrast(1.1) brightness(0.85);
+}
+.tile:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0) contrast(1.15) brightness(1);
+}
+
+/* Form */
+.input-sacro {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-dim);
+    border-radius: 0;
+    color: var(--text-primary);
+    font-family: "Outfit", sans-serif;
+    font-size: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+.input-sacro:focus {
+    outline: none;
+    border-bottom-color: var(--primary-accent);
+}
+.input-sacro::placeholder {
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* Footer monumental */
+.footer-mark {
+    font-family: "Marcellus", serif;
+    font-size: clamp(4rem, 22vw, 22rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--surface-stone);
+    -webkit-text-stroke: 1px var(--border-dim);
+    text-transform: uppercase;
+    user-select: none;
+}
+
+/* Detail row */
+.detail-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
     align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+}
+@media (min-width: 1024px) {
+    .detail-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 6rem;
+    }
+}
+.detail-row.reverse {
+    direction: rtl;
+}
+.detail-row.reverse > * {
+    direction: ltr;
 }
 
-.App-link {
-    color: #61dafb;
+/* Number tag */
+.num-tag {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--primary-accent);
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Marquee */
+.marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--border-dim);
+    border-bottom: 1px solid var(--border-dim);
+    padding: 1.5rem 0;
+}
+.marquee-inner {
+    display: flex;
+    width: max-content;
+    gap: 4rem;
+    white-space: nowrap;
+    font-family: "Marcellus", serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.marquee-inner span {
+    color: var(--text-primary);
+}
+.marquee-inner .dot {
+    color: var(--primary-accent);
+}
+
+/* Nav */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    mix-blend-mode: difference;
+    pointer-events: none;
+}
+.nav-bar > * {
+    pointer-events: auto;
 }

@@ -82,7 +82,9 @@ webpackConfig.devServer = (devServerConfig) => {
 };
 
 // Wrap with visual edits (automatically adds babel plugin, dev server, and overlay in dev mode)
-if (isDevServer) {
+// NOTE: Disabled for this project — visual-edits injects custom props (x-line-number, etc.)
+// onto every JSX element, which conflicts with React Three Fiber primitives like <mesh>, <group>.
+if (isDevServer && process.env.DISABLE_VISUAL_EDITS !== "true") {
   try {
     const { withVisualEdits } = require("@emergentbase/visual-edits/craco");
     webpackConfig = withVisualEdits(webpackConfig);
