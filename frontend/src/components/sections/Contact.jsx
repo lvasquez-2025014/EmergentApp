@@ -104,7 +104,8 @@ export default function Contact() {
             <button
               type="submit"
               disabled={sending}
-              className="btn-sacro"
+              className="btn-sacro magnetic"
+              data-cursor-label="Enviar"
               data-testid="contact-submit"
             >
               {sending ? "Enviando…" : "Enviar solicitud →"}

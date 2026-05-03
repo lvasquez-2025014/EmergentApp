@@ -36,6 +36,7 @@ export default function Catalog({ onSelect }) {
                 key={item.id}
                 onClick={() => onSelect && onSelect(item)}
                 className={`tile ${span} ${aspect} text-left group`}
+                data-cursor-label="Ver obra"
                 data-testid={`catalog-item-${item.id}`}
               >
                 <div className="relative w-full h-full">
