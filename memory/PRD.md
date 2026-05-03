@@ -18,6 +18,22 @@ Diseñar la arquitectura conceptual, visual y técnica de una página web de neg
 - Sonner for toasts
 - Static catalog data in `/src/data/catalog.js`
 
+## Implemented (Iteration 2 — 2026-02-26 — Multi-device Optimization)
+- Preloader cinemático (contador 000→100, reveal monumental, 1.5s)
+- Revelación de texto carácter-por-carácter (mask translateY) en hero y párrafos
+- Cursor magnético con etiquetas contextuales (data-cursor-label)
+- Indicador de sección lateral (I/II/III/IV) con línea animada y label hover
+- Barra vertical de progreso de scroll
+- Partículas de polvo sagrado 3D (dust motes) con movimiento orgánico
+- 6 velas litúrgicas con flamas animadas y point lights parpadeantes
+- `useDevice` hook: DPR adaptativo, partículas reducidas en móvil (420→90), post-FX y velas desactivados en low-end, AA desactivado en mobile
+- Lenis smooth scroll skip automático en dispositivos touch + prefers-reduced-motion
+- Menú hamburguesa + drawer lateral en tablet/mobile (breakpoint `lg`)
+- Tipografía fluida (clamp) desde 390px hasta 1920px
+- Viewport `viewport-fit=cover` + OG meta tags + lang="es"
+- @media (prefers-reduced-motion: reduce) respetado
+- Testing 100% (14/14 flujos en 3 viewports)
+
 ## Implemented (Iteration 1 — 2026-02-26)
 - Cinematic 3D cathedral scene (key spotlight, side rim, point fills, fog, light shafts)
 - Floating sacred artifacts: golden cross, monumental obelisks, bronze orbs, gold arch
