@@ -1,48 +1,36 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sections = [
-  { id: "hero", num: "I", label: "Inicio" },
-  { id: "catalog", num: "II", label: "Catálogo" },
-  { id: "manifest", num: "III", label: "Manifiesto" },
-  { id: "contact", num: "IV", label: "Encargo" },
+  { path: "/inicio", num: "I", label: "Inicio" },
+  { path: "/catalogo", num: "II", label: "Catálogo" },
+  { path: "/manifiesto", num: "III", label: "Manifiesto" },
+  { path: "/encargo", num: "IV", label: "Encargo" },
 ];
 
 export default function SectionIndicator() {
-  const [active, setActive] = useState("hero");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [active, setActive] = useState("/inicio");
 
   useEffect(() => {
-    const onScroll = () => {
-      const center = window.scrollY + window.innerHeight / 2;
-      let current = "hero";
-      sections.forEach((s) => {
-        const el = document.getElementById(s.id);
-        if (el) {
-          const top = el.offsetTop;
-          if (center >= top) current = s.id;
-        }
-      });
-      setActive(current);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const current = sections.some((s) => s.path === location.pathname)
+      ? location.pathname
+      : "/inicio";
+    setActive(current);
+  }, [location.pathname]);
 
   return (
     <aside className="section-indicator" data-testid="section-indicator">
       <ul>
         {sections.map((s) => {
-          const isActive = active === s.id;
+          const isActive = active === s.path;
           return (
-            <li key={s.id}>
+            <li key={s.path}>
               <button
-                onClick={() =>
-                  document
-                    .getElementById(s.id)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => navigate(s.path)}
                 className={`section-dot ${isActive ? "active" : ""}`}
-                data-testid={`indicator-${s.id}`}
+                data-testid={`indicator-${s.path.replace("/", "")}`}
                 aria-label={s.label}
               >
                 <span className="section-dot-num">{s.num}</span>

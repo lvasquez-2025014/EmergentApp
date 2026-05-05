@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DetailDialog({ item, onClose }) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (item) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -64,11 +67,7 @@ export default function DetailDialog({ item, onClose }) {
             <button
               onClick={() => {
                 onClose();
-                setTimeout(() => {
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
+                setTimeout(() => navigate("/encargo"), 100);
               }}
               className="btn-sacro"
               data-testid="detail-cta-encargar"

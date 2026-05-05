@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import RevealText from "../RevealText";
 
 export default function Hero() {
   const wordsRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -45,11 +47,7 @@ export default function Hero() {
           />
           <div className="flex items-center gap-4">
             <button
-              onClick={() =>
-                document
-                  .getElementById("catalog")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => navigate("/catalogo")}
               className="btn-sacro magnetic"
               data-cursor-label="Explorar"
               data-testid="hero-cta-explorar"

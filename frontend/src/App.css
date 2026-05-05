@@ -161,6 +161,135 @@
     color: var(--primary-accent);
 }
 
+/* Page Views with smooth transitions */
+.page-view,
+.page-view-catalog,
+.page-view-manifest,
+.page-view-contact {
+    min-height: 100vh;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    will-change: opacity, transform;
+}
+
+.page-view-manifest {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page-view-contact {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Smooth page transitions */
+.page-transition-wrapper {
+    min-height: 100vh;
+}
+
+/* Enhanced hover effects for links */
+.overline {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+/* Enhanced card interactions */
+.tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-dim);
+    background: var(--surface-stone);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(192, 160, 128, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.tile:hover {
+    border-color: var(--primary-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.tile:hover::before {
+    opacity: 1;
+}
+
+/* Magnetic button effect base */
+.magnetic {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Scroll reveal animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Enhanced section transitions */
+section {
+    transition: opacity 0.5s ease;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-dim);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-accent);
+}
+
 /* Nav */
 .nav-bar {
     position: fixed;
