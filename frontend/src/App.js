@@ -238,10 +238,10 @@ function ContactPage() {
               <div className="mt-20 text-center">
                 <div className="overline mb-4">Compromiso</div>
                 <p className="font-narrative text-xl md:text-2xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed">
-                  "{data.quote.text}"
+                  &ldquo;{data.quote.text}&rdquo;
                 </p>
                 <p className="font-narrative text-sm mt-6 text-[var(--text-secondary)]">
-                  — {data.quote.author}, {data.quote.role}
+                  {data.quote.author}, {data.quote.role}
                 </p>
               </div>
             )}

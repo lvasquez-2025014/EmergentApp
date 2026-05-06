@@ -105,8 +105,8 @@ export default function Contact({ apiData }) {
           <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-6 pt-6">
             <div className="overline">
               {contactInfo 
-                ? `Atelier · ${contactInfo.address.city} &nbsp;·&nbsp; ${contactInfo.phone}`
-                : "Atelier · Sevilla, ES &nbsp;·&nbsp; +34 954 000 000"
+                ? `Atelier · ${contactInfo.address.city} · ${contactInfo.phone}`
+                : "Atelier · Sevilla, ES · +34 954 000 000"
               }
             </div>
             <button
@@ -116,7 +116,7 @@ export default function Contact({ apiData }) {
               data-cursor-label="Enviar"
               data-testid="contact-submit"
             >
-              {sending ? "Enviando…" : "Enviar solicitud →"}
+              {sending ? "Enviando..." : "Enviar solicitud"}
             </button>
           </div>
         </form>
