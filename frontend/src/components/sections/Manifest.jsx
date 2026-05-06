@@ -1,14 +1,19 @@
-import { principles, stats } from "../../data/catalog";
+import { principles as staticPrinciples, stats as staticStats } from "../../data/catalog";
 
-export default function Manifest() {
+export default function Manifest({ apiData }) {
+  // Usar datos de API si están disponibles, si no usar datos estáticos
+  const principles = apiData?.principles || staticPrinciples;
+  const stats = apiData?.stats || staticStats;
+  const title = apiData?.title || "Tres principios inquebrantables";
+  
   return (
     <section id="manifest" className="section" data-testid="section-manifest">
       <div className="section-frame">
         <div className="overline mb-3">III — Manifiesto</div>
         <h2 className="font-monumental text-5xl md:text-7xl uppercase tracking-tight max-w-5xl">
-          Tres principios<br />
+          {title.split(' ').slice(0, 2).join(' ')}<br />
           <span className="font-narrative italic font-light text-[var(--primary-accent)]">
-            inquebrantables
+            {title.split(' ').slice(2).join(' ')}
           </span>
         </h2>
 
@@ -31,11 +36,11 @@ export default function Manifest() {
         </div>
 
         <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border-dim)] brutal-border">
-          {stats.map((s) => (
+          {stats.map((s, idx) => (
             <div
-              key={s.label}
+              key={s.label || idx}
               className="bg-[var(--bg-base)] p-8 md:p-12 text-center"
-              data-testid={`stat-${s.label}`}
+              data-testid={`stat-${s.label || idx}`}
             >
               <div className="font-monumental text-3xl md:text-5xl text-[var(--primary-accent)] mb-3">
                 {s.num}

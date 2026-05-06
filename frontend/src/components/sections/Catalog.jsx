@@ -1,6 +1,19 @@
-import { catalog } from "../../data/catalog";
+import { catalog as staticCatalog } from "../../data/catalog";
 
-export default function Catalog({ onSelect }) {
+export default function Catalog({ onSelect, apiData }) {
+  // Usar datos de API si están disponibles, si no usar datos estáticos
+  const works = apiData?.works || staticCatalog;
+  const title = apiData?.title || "Obras vivas en piedra";
+  const subtitle = apiData?.subtitle || "Cuatro piezas seleccionadas del fondo permanente. Cada una es una conversación entre el cincel, la materia y el silencio.";
+  
+  // Función para obtener imagen (API no tiene URLs, usar datos estáticos)
+  const getImage = (item, idx) => {
+    if (staticCatalog[idx]?.id === item.id) {
+      return staticCatalog[idx].image;
+    }
+    return staticCatalog[0]?.image || "";
+  };
+  
   return (
     <section id="catalog" className="section" data-testid="section-catalog">
       <div className="section-frame">
@@ -8,20 +21,20 @@ export default function Catalog({ onSelect }) {
           <div>
             <div className="overline mb-3">II — Catálogo</div>
             <h2 className="font-monumental text-5xl md:text-7xl uppercase tracking-tight">
-              Obras<br />
+              {title.split(' ')[0]}<br />
               <span className="font-narrative italic font-light text-[var(--primary-accent)]">
-                vivas
+                {title.split(' ')[1]}
               </span>{" "}
-              en piedra
+              {title.split(' ').slice(2).join(' ')}
             </h2>
           </div>
           <p className="font-narrative text-lg max-w-md text-[var(--text-secondary)]">
-            Cuatro piezas seleccionadas del fondo permanente. Cada una es una conversación entre el cincel, la materia y el silencio.
+            {subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-          {catalog.map((item, idx) => {
+          {works.map((item, idx) => {
             const span =
               idx === 0
                 ? "md:col-span-7 md:row-span-2"
@@ -34,14 +47,14 @@ export default function Catalog({ onSelect }) {
             return (
               <button
                 key={item.id}
-                onClick={() => onSelect && onSelect(item)}
+                onClick={() => onSelect && onSelect({ ...item, image: getImage(item, idx) })}
                 className={`tile ${span} ${aspect} text-left group`}
                 data-cursor-label="Ver obra"
                 data-testid={`catalog-item-${item.id}`}
               >
                 <div className="relative w-full h-full">
                   <img
-                    src={item.image}
+                    src={getImage(item, idx)}
                     alt={item.title}
                     loading="lazy"
                     className="w-full h-full object-cover"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function Contact() {
+export default function Contact({ apiData }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -9,6 +9,11 @@ export default function Contact() {
     message: "",
   });
   const [sending, setSending] = useState(false);
+
+  // Usar datos de API si están disponibles
+  const title = apiData?.title || "Encarga una obra única";
+  const subtitle = apiData?.subtitle || "Cada solicitud se atiende personalmente por nuestra dirección artística. Tiempo de respuesta: 48 horas.";
+  const contactInfo = apiData?.contact;
 
   const set = (k) => (e) => setForm((s) => ({ ...s, [k]: e.target.value }));
 
@@ -39,13 +44,13 @@ export default function Contact() {
       <div className="section-frame">
         <div className="overline mb-3">IV — Encargo</div>
         <h2 className="font-monumental text-5xl md:text-7xl uppercase tracking-tight max-w-5xl">
-          Encarga una<br />
+          {title.split(' ').slice(0, 2).join(' ')}<br />
           <span className="font-narrative italic font-light text-[var(--primary-accent)]">
-            obra única
+            {title.split(' ').slice(2).join(' ')}
           </span>
         </h2>
         <p className="font-narrative text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mt-6 mb-16">
-          Cada solicitud se atiende personalmente por nuestra dirección artística. Tiempo de respuesta: 48 horas.
+          {subtitle}
         </p>
 
         <form
@@ -99,7 +104,10 @@ export default function Contact() {
           </div>
           <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-6 pt-6">
             <div className="overline">
-              Atelier · Sevilla, ES &nbsp;·&nbsp; +34 954 000 000
+              {contactInfo 
+                ? `Atelier · ${contactInfo.address.city} &nbsp;·&nbsp; ${contactInfo.phone}`
+                : "Atelier · Sevilla, ES &nbsp;·&nbsp; +34 954 000 000"
+              }
             </div>
             <button
               type="submit"
